@@ -93,7 +93,10 @@ if __name__ == '__main__':
                     with open(file_path, 'w') as archive_md_file:
                         archive_md_file.writelines(front_matter)
                     added_files.append(archive_type + ': ' + file_name)
-            all_files = os.listdir(archive_folder_path + '/' + archive_type)
+            if not os.path.exists(archive_folder_path + '/' + archive_type):
+                all_files = []
+            else: 
+                all_files = os.listdir(archive_folder_path + '/' + archive_type)
             for archive_file in all_files:
                 if archive_file not in file_list:
                     os.remove(archive_folder_path + '/' + archive_type + '/' + archive_file)
